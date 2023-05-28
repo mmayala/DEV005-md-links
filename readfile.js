@@ -1,9 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
+
 //Validar si existe una ruta
-const existsRoute = (route) => {
-  if(fs.existsSync(route)){
+const existsRoute = (userPath) => {
+  if(fs.existsSync(userPath)){
     console.log('La ruta existe')
     return true
   } else {
@@ -16,30 +17,29 @@ const existsRoute = (route) => {
 
 
 //Validar si es ruta absoluta, si no lo es convertir en absoluta
-const isRouteAbsolute = (route) => {
-if(path.isAbsolute(route)){
-  return route
-  //Si no es ruta absoluta convertir en ruta absoluta
+const isRouteAbsolute = (userPath) => {
+if(path.isAbsolute(userPath)){
+  return userPath;
 } else {
-  return path.resolve(route);
+  return path.resolve(userPath);
 }
-//console.log(isRouteAbsolute);
 };
 
-const isFileDirec =  (route) => {
+const isFile =  (userPath) => {
   return new Promise((resolve, reject) => {
-    fs.stat(route, (err, stats) => {
+    fs.stat(userPath, (err, stats) => {
       if( !err ){
         if(stats.isFile()){
-            const extensionfile = path.extname(route);
+            const extensionfile = path.extname(userPath);
             const isFileMd = (extensionfile === '.md');
             console.log(`Es un archivo .md ? ${isFileMd}`);
-           const readFile = fs.readFile(route,'utf8', (err, data) => {
+            fs.readFile(userPath,'utf8', (err, data) => {
             if (err){
               console.log('Archivo no existe')
               return;
             }
-            console.log(data);
+            const links = extractlinks(data);
+            resolve(links);
            })
             resolve(isFileMd);
         }  else {
@@ -52,12 +52,21 @@ const isFileDirec =  (route) => {
 });
   });
 };
+const extractlinks = (data) =>{
+  const pattern = /\[.*?\]\((.*?)\)/g;
+  const links = [];
+  let match;
+  while ((match = pattern.exec(data)) !== null){
+    links.push(match[1]);
+  }
+  return links;
 
-
+};
 module.exports = {
   isRouteAbsolute,
   existsRoute,
-  isFileDirec,
+  isFile,
+  extractlinks,
 };
 
 /*else if(stats.isDirectory()){
