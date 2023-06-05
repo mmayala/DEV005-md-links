@@ -20,14 +20,18 @@ const mdLinks = (userPath, options) => {
       const absolutePath = isRouteAbsolute(userPath);
 
       // Probar si la ruta es archivo md o directorio
-      const arrMds = getArrayMds(absolutePath);      
-     return Promise.all(extractLinks(readMds(arrMds)))
+      const arrMds = getArrayMds(absolutePath);    
+     
+      readMds(arrMds)
       //flat para eliminar un arr dentro de otro arr
-        .then((arrObjLinks) => arrObjLinks.flat())
+        .then((arrObjLinks) => (arrObjLinks.flat()))
+        
         .then((res) =>{
           //si pasa opcion --validate
+          //console.log( 'esto es option:', options)
           if(options) {
-            return getValidateMdLinks(res)
+            const promises = res.map(getValidateMdLinks);
+            return Promise.all(promises)
           }
           return res;
         })
@@ -50,9 +54,9 @@ const mdLinks = (userPath, options) => {
 
 
 
-mdLinks('README.md')
+mdLinks('Pruebas', process.argv[2])
   .then((links) => {
-    console.log("Enlaces encontrados:", links.length);
+    console.log(links);
   })
   .catch((error) => {
     console.error("Error", error);

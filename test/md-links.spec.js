@@ -1,5 +1,5 @@
-const {mdLinks} = require('../index.js');
-const { existsRoute } = require('../readfile.js');
+const {mdLinks} = require('../src/index.js');
+const { existsRoute } = require('../src/readfile.js');
 
 
 describe('mdLinks', () => {

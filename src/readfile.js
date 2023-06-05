@@ -62,6 +62,7 @@ const extractLinks = (data, pathMds) => {
   return links;
 };
 const readMds = (arrayMds) => {
+
   const arrayLinks = arrayMds.map((md) => {
     return new Promise((resolve, reject) => {
       fs.readFile(md, "utf8", (err, data) => {
@@ -78,20 +79,26 @@ const readMds = (arrayMds) => {
   return Promise.all(arrayLinks);
 };
 
-const getValidateMdLinks = (linksObject) =>{
-  //console.log(linksObject);
+const getValidateMdLinks = (linksObject) => {
 return fetch (linksObject.href)
 .then((response) => {
   //console.log(response.status);
-  return {...linksObject, status: response.status, ok: true}
+  return {
+    ...linksObject, 
+    status: response.status,
+    ok: response.ok
+  };
 })
 .catch((err) => {
   let status = 404;
-  console.log(status);
   if(err.response){
     status = err.response.status;
   }
-  return {...linksObject, status, ok: false}
+  return {
+    ...linksObject, 
+    status, 
+    ok: false
+  }
 
 });
 };
