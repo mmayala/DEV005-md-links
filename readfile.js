@@ -10,7 +10,7 @@ const existsRoute = (userPath) => {
     //console.log("La ruta existe");
     return true;
   } else {
-    console.log("La ruta no existe");
+    //console.log("La ruta no existe");
     return false;
   }
 };
@@ -54,15 +54,14 @@ const extractLinks = (data, pathMds) => {
   while ((match = regex.exec(data)) !== null) {
     const textLinks = match[1];
     const urlsLinks = match[2].substring(1, match[2].length - 1);
-    console.log(urlsLinks);
     const filePath = pathMds;
     //console.log(route);
     links.push({ href: urlsLinks, text: textLinks,  file: filePath });
   }
   return links;
 };
-const readMds = (arrayMds) => {
 
+const readMds = (arrayMds) => {
   const arrayLinks = arrayMds.map((md) => {
     return new Promise((resolve, reject) => {
       fs.readFile(md, "utf8", (err, data) => {
@@ -102,6 +101,23 @@ return fetch (linksObject.href)
 
 });
 };
+
+const statValidate = ((linksArr, isValidate) => {
+  const totalLinks = linksArr.length;
+  const uniqueLinks = [...new Set(linksArr.map((link) => link.href))];
+  const brokenLinks = linksArr.filter((link) => !link.ok);
+
+  const statsLinks = `
+    Total: ${totalLinks}
+    Unique: ${uniqueLinks.length}`;
+
+  // Si tiene la opción validate
+  if (isValidate) {
+    return `${statsLinks}\n    Broken: ${brokenLinks.length}`;
+  }
+
+  return statsLinks;
+});
 /*getValidateMdLinks ({
   href: 'https://www.youtube.com/watch?v=FylpygEYYbE',
    text: 'mi musica favorita vallenato',
@@ -116,11 +132,6 @@ return fetch (linksObject.href)
   });
 */
   
-/*array de objetos resuktado de readMds
-declarar la funcion validar 
-probar en mdLinks con .then 
-si urlToHttpOptions.validate resuelve  resultado de la function validate 
-y si no resuelve result. flat*/
 
 
 module.exports = {
@@ -130,4 +141,5 @@ module.exports = {
   extractLinks,
   readMds,
   getValidateMdLinks,
+  statValidate,
 };

@@ -7,8 +7,10 @@ const {
   getArrayMds,
   extractLinks,
   readMds,
-  getValidateMdLinks
+  getValidateMdLinks,
+  statValidate,
 } = require("./readfile.js");
+
 
 
 /* -------------- Función Md Links --------------*/
@@ -29,16 +31,23 @@ const mdLinks = (userPath, options) => {
         .then((res) =>{
           //si pasa opcion --validate
           //console.log( 'esto es option:', options)
-          if(options) {
+          if(options.validate) {
             const promises = res.map(getValidateMdLinks);
             return Promise.all(promises)
           }
           return res;
         })
+        .then((stats) => {
+          if(options.stats){
+            const result = statValidate (stats, options.validate);
+            resolve (result);
+          }else{
+            resolve  (stats);
 
-        .then((result) =>{
-          resolve (result);
+          }
+         
         })
+
         .catch((error) => {
           console.error("Error:", error);
           reject(error);
@@ -49,18 +58,7 @@ const mdLinks = (userPath, options) => {
 
   });
 };
-  
 
-
-
-
-mdLinks('Pruebas', process.argv[2])
-  .then((links) => {
-    console.log(links);
-  })
-  .catch((error) => {
-    console.error("Error", error);
-  });
 
 module.exports = {
   mdLinks,
