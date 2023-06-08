@@ -18,7 +18,7 @@ describe("mdLinks", () => {
     });
   });
 
-  it("test_valid_path_to_single_md_file", () => {
+  it("Debería probar una ruta valida para el archivo md", () => {
     const userPath = "Pruebas/prueba2/ejemplo.md";
     const options = {};
     const expectedOutput = [

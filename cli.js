@@ -1,6 +1,6 @@
 const {mdLinks} = require('./index.js'); 
 
-console.log(process.argv)
+//console.log(process.argv)
 const path = process.argv[2]
 const validate = process.argv.filter((arg) => {
 return arg === '--validate'
@@ -18,7 +18,7 @@ mdLinks(path, options)
     console.log(links);
   })
   .catch((error) => {
-    console.error("Error", error);
+    console.error(error);
   });
 
 /*mdLinks('Pruebas',process.argv[2])
