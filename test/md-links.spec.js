@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { mdLinks } = require("../index.js");
+const path = require('path')
 const {
   existsRoute,
   isRouteAbsolute,
@@ -10,28 +11,44 @@ const {
   statValidate,
 } = require("../readfile.js");
 
+
+//Test función mdLinks
 describe("mdLinks", () => {
-  //Test que rechaza la promesa cuando la ruta no existe
-  it("Debe rechazar cuando el path no existe", () => {
+  it('Deberia ser una función', () => {
+    expect(typeof mdLinks).toBe('function');
+  });
+
+  
+  it("Debe rechazar la promesa cuando el path no existe", () => {
     return mdLinks("Pruebas/pruebaa.txt").catch((error) => {
       expect(error).toBe("La ruta no es archivo md ni un directorio");
     });
   });
 
-  it("Debería probar una ruta valida para el archivo md", () => {
-    const userPath = "Pruebas/prueba2/ejemplo.md";
-    const options = {};
-    const expectedOutput = [
+  it('Debe devolver un objeto con enlaces para un archivo md valido', (done) => {
+    const userPath = 'Pruebas/prueba2/ejemplo.md';
+    const options = { validate: true, stats: false };
+    console.log(options)
+
+    mdLinks(userPath, options)
+    .then((result) => {
+    
+      expect(result).toEqual([
         {
-            href: "https://www.youtube.com/watch?v=FylpygEYYbE", 
-            text: "mi musica favorita vallenato",
-            file: "C:/Users/danni/OneDrive/Documents/PROYECTOS LABORATORIA/MD LINKS/DEV005-md-links/Pruebas/prueba2/ejemplo.md",
+          href: 'https://www.youtube.com/watch?v=FylpygEYYbE',
+          text: 'mi musica favorita vallenato',
+          file: path.normalize('C:/Users/danni/OneDrive/Documents/PROYECTOS LABORATORIA/MD LINKS/DEV005-md-links/Pruebas/prueba2/ejemplo.md'),
+          status: 200,
+          ok: true
         }
-    ];
-    return mdLinks(userPath, options).then((result) => {
-        expect(result).toEqual(expectedOutput);
+      ]);
+      done();
+    })
+    .catch((error) =>{
+      console.error(error);
+      done(error);
     });
-});
+  });
 });
 
 //Test para validar si una ruta existe
@@ -52,6 +69,8 @@ describe("isRouteAbsolute", () => {
   });
 });
 
+
+//Test de la función getArrayMds
 describe("getArrayMds", () => {
   it("Debería retornar un array si es un  archivo md", () => {
     const isFile =
@@ -67,30 +86,41 @@ describe("getArrayMds", () => {
   });
 });
 
-/*describe("extractLinks", () => {
+//Test de la función extractLinks
+describe("extractLinks", () => {
   it("Debería delvolver los enlaces encontrados con formato href,text y file en la ruta de Prueba",  () => {
-    const route = "Pruebas";
-    const urls = [
+    const data = `Esto es una prueba [Hola soy Martha](https://github.com/mmayala)
+                  Aquí hay otra prueba [Está página es del Comil](https://idukay.net/#/my_resources)`;
+
+    const pathMds = 'Pruebas/textoprueba.md';
+    const expectedLinks = [
       {
         href: "https://github.com/mmayala",
         text: "Hola soy Martha",
-        file: "C:/Users/danni/OneDrive/Documents/PROYECTOS LABORATORIA/MD LINKS/DEV005-md-links/Pruebas/textoprueba.md",
+        file: 'Pruebas/textoprueba.md',
+      },
+      {
+        href: "https://idukay.net/#/my_resources",
+        text: "Está página es del Comil",
+        file: 'Pruebas/textoprueba.md',
       },
     ];
-    const extract = extractLinks(route)
-      expect(extract).toEqual(urls);
+    const extract = extractLinks(data, pathMds);
+      expect(extract).toEqual(expectedLinks);
       
   });
 
-  it("Debería delvolver los enlaces encontrados con formato href,text y file en la ruta de Prueba",  () => {
-    const route = "Pruebas";
-    const urls = extractLinks(route);
-    expect(urls).toEqual(urls);
+  it('Debería retornar un string sin enlaces', () =>{
+    const route = 'Este es una cadena de prueba sin enlaces';
+    const pathMd ='ejemplo.md'
+    const result = extractLinks(route, pathMd);
+    expect(result).toEqual([])
   });
-});*/
+});
 
-
+//Test de la función getValidateMdLinks
   describe('getValidateMdLinks', () => {
+
     it("Debería retornar enlaces validos de un objeto con prueba exitosa", async () => {
       const linksObject = {
           href: "https://www.google.com",
@@ -105,6 +135,8 @@ describe("getArrayMds", () => {
       const result =  await getValidateMdLinks(linksObject);
       expect(result).toEqual(expectedOutput);
   });
+
+  //En este test se utiliza mockRejectValue que es útil para crear funciones simuladas asincronas que siempre rechazarán
   it("Debería retornar diferentes tipos de errores en catch", async () => {
     const linksObject = {
         href: "https://www.google.com/notfound",
@@ -121,7 +153,7 @@ describe("getArrayMds", () => {
 });
 
   });
-
+//Test de la función statValidate
   describe ('statValidate', () => {
     
     it("Deberia retornar enlaces validos con los Totales y Únicos", () => {
@@ -139,11 +171,4 @@ describe("getArrayMds", () => {
   
 
     
-   
- 
-
-
-  /*it("test_reading_one_md_file_successfully", async () => {
-        const result = await readMds(["./test/testFiles/test1.md"]);
-        expect(result).toEqual([[{ href: 'https://www.google.com', text: 'Google', file: './test/testFiles/test1.md' }]]);
-    });*/
+  

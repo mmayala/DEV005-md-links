@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const {mdLinks} = require('./index.js'); 
 
 //console.log(process.argv)
@@ -13,6 +15,7 @@ const options = {
     validate: validate,
     stats: stats,
 }
+
 mdLinks(path, options)
   .then((links) => {
     console.log(links);
@@ -21,13 +24,3 @@ mdLinks(path, options)
     console.error(error);
   });
 
-/*mdLinks('Pruebas',process.argv[2])
-  .then((links) => {
-    console.log(links);
-  })
-  .catch((error) => {
-    console.error("Error", error);
-  });*/
-
-//path.isAbsolute(ruta)
-//path.resolve(ruta)

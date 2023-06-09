@@ -30,7 +30,6 @@ const mdLinks = (userPath, options) => {
         
         .then((res) =>{
           //si pasa opcion --validate
-          //console.log( 'esto es option:', options)
           if(options.validate) {
             const promises = res.map(getValidateMdLinks);
             return Promise.all(promises)
@@ -49,7 +48,7 @@ const mdLinks = (userPath, options) => {
         })
 
         .catch((error) => {
-          console.error("Error:", error);
+          console.error(error);
           reject(error);
         });      
     } else {

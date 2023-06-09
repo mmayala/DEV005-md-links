@@ -45,10 +45,8 @@ const getArrayMds = (userPath) => {
 };
 //Función para extraer los links con expresión regular exec
 const extractLinks = (data, pathMds) => {
-  //const mds =  getArrayMds(data);
   const regex = /\[([^\[]+)\](\(.*\))/gm;
   const links = [];
-  //console.log(regex);
   let match;
 
   while ((match = regex.exec(data)) !== null) {
@@ -118,19 +116,7 @@ const statValidate = ((linksArr, isValidate) => {
 
   return statsLinks;
 });
-/*getValidateMdLinks ({
-  href: 'https://www.youtube.com/watch?v=FylpygEYYbE',
-   text: 'mi musica favorita vallenato',
-   file: 'C:User//s//danni//OneDrive//Documents//PROYECTOS LABORATORIA//MD LINKS//DEV005-md-links//Pruebas//prueba2//ejemplo.md'
-   
-  })
-  .then((response) => {
-    console.log(response);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-*/
+
   
 
 
