@@ -94,9 +94,9 @@ Ejemplo:
     Total: 3
     Unique: 3
 ```
-### --stats y --validates
+### --stats y --validate
 
-Se debe ingresar los siguientes comandos para obtener la opción stats y validate y/o(viceversa) despues de la ruta y obtener el total de links, los unicos y los inválidos.
+Se debe ingresar los siguientes comandos para obtener la opción stats y validate y/o(viceversa) despues de la ruta y obtener el total de links, los únicos y los inválidos.
 
 `md-links <path-to-file --stats --validate>`
 
