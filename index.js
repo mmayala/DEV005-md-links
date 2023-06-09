@@ -1,39 +1,64 @@
-const fs = require('fs');
-const {isRouteAbsolute, existsRoute, isFileDirec} = require('./readfile.js')
-const mdLinks = (path, options) => {
+const fs = require("fs");
+const path = require("path");
+
+const {
+  isRouteAbsolute,
+  existsRoute,
+  getArrayMds,
+  extractLinks,
+  readMds,
+  getValidateMdLinks,
+  statValidate,
+} = require("./readfile.js");
+
+
+
+/* -------------- Función Md Links --------------*/
+const mdLinks = (userPath, options) => {
   return new Promise((resolve, reject) => {
     // Validar si la ruta existe
-   
-    if (existsRoute(path)) {
-    } else {
-      reject('La ruta no existe');
-      return;
-    }
+    if (existsRoute(userPath)) {
       // Chequear o convertir a una ruta absoluta
-      const absolutePath = isRouteAbsolute(path);
-     //console.log(absolutePath);
+      const absolutePath = isRouteAbsolute(userPath);
 
-      // Probar si la ruta es archivo md
-      isFileDirec(absolutePath)
-        .then((result) => {
-          if (result) {
-            //console.log('Es un archivo .md');
-          } 
-          resolve(absolutePath);
+      // Probar si la ruta es archivo md o directorio
+      const arrMds = getArrayMds(absolutePath);    
+     
+      readMds(arrMds)
+      //flat para eliminar un arr dentro de otro arr
+        .then((arrObjLinks) => (arrObjLinks.flat()))
+        
+        .then((res) =>{
+          //si pasa opcion --validate
+          if(options.validate) {
+            const promises = res.map(getValidateMdLinks);
+            return Promise.all(promises)
+          }
+          return res;
         })
+        .then((stats) => {
+          if(options.stats){
+            const result = statValidate (stats, options.validate);
+            resolve (result);
+          }else{
+            resolve  (stats);
+
+          }
+         
+        })
+
         .catch((error) => {
-          console.error('Error:', error);
+          console.error(error);
           reject(error);
-        });
-    
+        });      
+    } else {
+      reject("La ruta no es archivo md ni un directorio");
+    }
+
   });
 };
 
-  //Si es un directorio filtar los archivos md
-
-mdLinks('README.md');
 
 module.exports = {
-  mdLinks
+  mdLinks,
 };
-
