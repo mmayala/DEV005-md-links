@@ -6,12 +6,8 @@
 * [2. Descripción del proyecto](#2-Descripción-del-proyecto)
 * [3. Instalación](#3-Instalación)
 * [4. Uso de la Librería ](#4-Uso-de-la-Librería )
-* [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
-* [6. Entregables](#6-entregables)
-* [7. Hacker edition](#7-hacker-edition)
-* [8. Pistas, tips y lecturas complementarias](#8-pistas-tips-y-lecturas-complementarias)
-* [9. Checklist](#9-checklist)
-* [10. Achicando el problema](#10-achicando-el-problema)
+* [5. Diagrama de Flujo](#5-Diagrama-de-Flujo)
+
 
 ***
 
@@ -70,11 +66,12 @@ mdLinks-mmayala Pruebas/prueba2/ejemplo.md
 Se debe ingresar el siguiente comando para obtener la opción validate despues de la ruta y verificar los links.
 
 `md-links <path-to-file --validate>`
-mdLinks-mmayala Pruebas/prueba2/ejemplo.md --validate
 
-Por ejemplo:
+
+Ejemplo:
 
 ```sh
+mdLinks-mmayala Pruebas/prueba2/ejemplo.md --validate
  {
     href: 'https://www.youtube.com/watch?v=FylpygEYYbE',
     text: 'mi musica favorita vallenato',
@@ -88,12 +85,12 @@ Por ejemplo:
 Se debe ingresar el siguiente comando para obtener la opción stats despues de la ruta y obtener el total de los links y los unicos
 
 `md-links <path-to-file --stats>`
-mdLinks-mmayala Pruebas/prueba2/ejemplo.md --stats
+
 
 Ejemplo:
 
 ```sh
- 
+ mdLinks-mmayala Pruebas/prueba2/ejemplo.md --stats
     Total: 3
     Unique: 3
 ```
@@ -102,19 +99,19 @@ Ejemplo:
 Se debe ingresar los siguientes comandos para obtener la opción stats y validate y/o(viceversa) despues de la ruta y obtener el total de links, los unicos y los inválidos.
 
 `md-links <path-to-file --stats --validate>`
-mdLinks-mmayala Pruebas/prueba2/ejemplo.md --stats --validate
-mdLinks-mmayala Pruebas/prueba2/ejemplo.md --validate --stats
+
 
 Ejemplo:
 
 ```sh
- 
+mdLinks-mmayala Pruebas/prueba2/ejemplo.md --stats --validate
+mdLinks-mmayala Pruebas/prueba2/ejemplo.md --validate --stats
      Total: 3
     Unique: 3
     Broken: 1
 ```
 
-## Diagrama de Flujo
+## 5. Diagrama de Flujo
 Se incluye el diagrama de flujo con el cual se realizó paso a paso el siguiente proyecto para una mejor comprensión de los usuarios.
 
 ![Diagrama de Flujo mdLinks](<Diagrama PATH - Página 1.png>)
