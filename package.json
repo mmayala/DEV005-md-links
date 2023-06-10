@@ -19,7 +19,7 @@
   "author": "",
   "license": "ISC",
   "bin": {
-    "MdLinks-mmayala": "cli.js"
+    "mdLinks-mmayala": "cli.js"
   },
   "bugs": {
     "url": "https://github.com/mmayala/DEV005-md-links/issues"
