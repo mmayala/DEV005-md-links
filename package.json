@@ -1,5 +1,5 @@
 {
-  "name": "md-links",
+  "name": "mdlinks-mmayala",
   "version": "0.1.0",
   "engines": {
     "node": ">=16.x"
@@ -19,7 +19,7 @@
   "author": "",
   "license": "ISC",
   "bin": {
-    "mdLinks-mmayala": "cli.js"
+    "mdlinks-mmayala": "cli.js"
   },
   "bugs": {
     "url": "https://github.com/mmayala/DEV005-md-links/issues"

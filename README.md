@@ -21,7 +21,9 @@ En el presente proyecto se crea una librería con Node.js donde permite extraer,
 
 Para instalar la libreria se debe correr el siguiente comando:
 
-* Desde consola:npm i mdlinks-mmayala
+
+* Desde consola: npm i mdlinks-mmayala
+
 
 ## 4. Uso de la Librería
 La librería ofrece dos opciones o argumentos para generar la validación y mostrar las estadísticas de los links.
@@ -45,7 +47,9 @@ Para extraer los links sin opción se debe pasar el siguiente comando en consola
 
 Ejemplo:
 
-```js
+
+```sh
+
 mdlinks-mmayala Pruebas/prueba2/ejemplo.md
 {
     href: 'https://www.youtube.com/watch?v=FylpygEYYbE',
