@@ -24,7 +24,7 @@ En el presente proyecto se crea una librería con Node.js donde permite extraer,
 
 Para instalar la libreria se debe correr el siguiente comando:
 
-* Desde consola: npm i mdlinks-mmayala
+* Desde consola: npm i mdlinks-mmayalae
 
 ## 4. Uso de la Librería
 La librería ofrece dos opciones o argumentos para generar la validación y mostrar las estadísticas de los links.
@@ -49,7 +49,7 @@ Para extraer los links sin opción se debe pasar el siguiente comando en consola
 Ejemplo:
 
 ```sh
-mdlinks-mmayala Pruebas/prueba2/ejemplo.md
+mdlinks-mmayalae Pruebas/prueba2/ejemplo.md
 {
     href: 'https://www.youtube.com/watch?v=FylpygEYYbE',
     text: 'mi musica favorita vallenato',
@@ -69,7 +69,7 @@ Se debe ingresar el siguiente comando para obtener la opción validate despues d
 Ejemplo:
 
 ```sh
-mdLinks-mmayala Pruebas/prueba2/ejemplo.md --validate
+mdlinks-mmayalae Pruebas/prueba2/ejemplo.md --validate
  {
     href: 'https://www.youtube.com/watch?v=FylpygEYYbE',
     text: 'mi musica favorita vallenato',
@@ -88,7 +88,7 @@ Se debe ingresar el siguiente comando para obtener la opción stats despues de l
 Ejemplo:
 
 ```sh
- mdLinks-mmayala Pruebas/prueba2/ejemplo.md --stats
+ mdlinks-mmayalae Pruebas/prueba2/ejemplo.md --stats
     Total: 3
     Unique: 3
 ```
@@ -102,8 +102,8 @@ Se debe ingresar los siguientes comandos para obtener la opción stats y validat
 Ejemplo:
 
 ```sh
-mdLinks-mmayala Pruebas/prueba2/ejemplo.md --stats --validate
-mdLinks-mmayala Pruebas/prueba2/ejemplo.md --validate --stats
+mdlinks-mmayalae Pruebas/prueba2/ejemplo.md --stats --validate
+mdlinks-mmayalae Pruebas/prueba2/ejemplo.md --validate --stats
      Total: 3
     Unique: 3
     Broken: 1
