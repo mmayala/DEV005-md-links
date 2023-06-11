@@ -8,6 +8,9 @@
 * [4. Uso de la Librería ](#4-Uso-de-la-Librería )
 * [5. Diagrama de Flujo](#5-Diagrama-de-Flujo)
 
+
+***
+
 ## 1. Markdown Links
 
 [Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado ligero muy popular entre developers. Es usado en muchísimas plataformas que manejan texto plano (GitHub, foros, blogs, ...) y es muy común encontrar varios archivos en ese formato en cualquier tipo de repositorio (empezando por el tradicional `README.md`).
@@ -21,7 +24,7 @@ En el presente proyecto se crea una librería con Node.js donde permite extraer,
 
 Para instalar la libreria se debe correr el siguiente comando:
 
-* Desde consola:npm i mdlinks-mmayala
+* Desde consola: npm i mdlinks-mmayala
 
 ## 4. Uso de la Librería
 La librería ofrece dos opciones o argumentos para generar la validación y mostrar las estadísticas de los links.
@@ -66,7 +69,7 @@ Se debe ingresar el siguiente comando para obtener la opción validate despues d
 Ejemplo:
 
 ```sh
-mdlinks-mmayala Pruebas/prueba2/ejemplo.md --validate
+mdLinks-mmayala Pruebas/prueba2/ejemplo.md --validate
  {
     href: 'https://www.youtube.com/watch?v=FylpygEYYbE',
     text: 'mi musica favorita vallenato',
@@ -85,7 +88,7 @@ Se debe ingresar el siguiente comando para obtener la opción stats despues de l
 Ejemplo:
 
 ```sh
-mdlinks-mmayala Pruebas/prueba2/ejemplo.md --stats
+ mdLinks-mmayala Pruebas/prueba2/ejemplo.md --stats
     Total: 3
     Unique: 3
 ```
@@ -99,8 +102,8 @@ Se debe ingresar los siguientes comandos para obtener la opción stats y validat
 Ejemplo:
 
 ```sh
-mdlinks-mmayala Pruebas/prueba2/ejemplo.md --stats --validate
-mdlinks-mmayala Pruebas/prueba2/ejemplo.md --validate --stats
+mdLinks-mmayala Pruebas/prueba2/ejemplo.md --stats --validate
+mdLinks-mmayala Pruebas/prueba2/ejemplo.md --validate --stats
      Total: 3
     Unique: 3
     Broken: 1
