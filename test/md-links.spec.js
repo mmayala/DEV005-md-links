@@ -26,9 +26,8 @@ describe("mdLinks", () => {
   });
 
   it('Debe devolver un objeto con enlaces para un archivo md valido', (done) => {
-    const userPath = 'Pruebas/prueba2/ejemplo.md';
+    const userPath = 'Pruebas/prueba2/ejemplo1.md';
     const options = { validate: true, stats: false };
-    console.log(options)
 
     mdLinks(userPath, options)
     .then((result) => {
@@ -37,7 +36,7 @@ describe("mdLinks", () => {
         {
           href: 'https://www.youtube.com/watch?v=FylpygEYYbE',
           text: 'mi musica favorita vallenato',
-          file: path.normalize('C:/Users/danni/OneDrive/Documents/PROYECTOS LABORATORIA/MD LINKS/DEV005-md-links/Pruebas/prueba2/ejemplo.md'),
+          file: path.normalize('C:/Users/danni/OneDrive/Documents/PROYECTOS LABORATORIA/MD LINKS/DEV005-md-links/Pruebas/prueba2/ejemplo1.md'),
           status: 200,
           ok: true
         }
